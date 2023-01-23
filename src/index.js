@@ -5,10 +5,11 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Menu from './elements/menu';
-import SignIn from './auth/SignIn';
-import SignUp from './auth/SignUp';
+import SignIn from './auth/signin';
+import SignUp from './auth/signup';
 import Home from './pages/home';
 import AddEmployee from './pages/add-employee';
+import EmployeeList from './pages/list-employee';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
       <Route path="/signIn" element={<SignIn />} />
       <Route path="/signUp" element={<SignUp />} />
       <Route path="/add-employee" element={<AddEmployee />} />
+      <Route path="/list-employee" element={<EmployeeList />} />
      
     </Routes>
   </BrowserRouter>
