@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link  } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+
+function HomeIcon(props: SvgIconProps) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
 
 const Menu = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,39 +21,33 @@ const Menu = () => {
       setIsLoggedIn(false);
     }
   }, []);
-  if (isLoggedIn) {  
-    return (
-      <nav>
-      <ul>
-        <li>
-          <Link to="/home">Home</Link>
-        </li>
-        <li>
-          <Link to="/list-employee">List</Link>
-        </li>
-        <li>
-          <Link to="/add-employee">Add</Link>
-        </li>
-      </ul>
-    </nav>
-      );
-  }else {
-    return (
-      <nav>
-      <ul>
-      <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/signIn">SignIn</Link>
-        </li>
-        <li>
-          <Link to="/signUp">signup</Link>
-        </li>
-      </ul>
-    </nav>
-      );
-  }
+
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <IconButton edge="start" color="inherit" aria-label="menu">
+          <HomeIcon />
+        </IconButton>
+        <Typography variant="h6">
+          {isLoggedIn ? "Welcome" : "Please Login"}
+        </Typography>
+        <div style={{ flexGrow: 1 }} />
+        {isLoggedIn ? (
+          <>
+            <Link to="/home">Home</Link>
+            <Link to="/list-employee">List</Link>
+            <Link to="/add-employee">Add</Link>
+          </>
+        ) : (
+          <>
+            <Link to="/">Home</Link>
+            <Link to="/signIn">SignIn</Link>
+            <Link to="/signUp">signup</Link>
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
+  );
 };
 
 export default Menu;

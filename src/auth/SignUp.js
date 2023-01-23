@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -22,25 +24,37 @@ const SignUp = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <TextField
+        label="Name"
         type="text"
-        placeholder="Name"
         value={name}
         onChange={e => setName(e.target.value)}
+        margin="normal"
+        fullWidth
       />
-      <input
+      <TextField
+        label="Email"
         type="email"
-        placeholder="Email"
         value={email}
         onChange={e => setEmail(e.target.value)}
+        margin="normal"
+        fullWidth
       />
-      <input
+      <TextField
+        label="Password"
         type="password"
-        placeholder="Password"
         value={password}
         onChange={e => setPassword(e.target.value)}
+        margin="normal"
+        fullWidth
       />
-      <button type="submit">Sign Up</button>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+      >
+        Sign Up
+      </Button>
       {error && <p>{error}</p>}
     </form>
   );
