@@ -35,8 +35,10 @@ const Menu = () => {
         {isLoggedIn ? (
           <>
             <Link to="/home">Home</Link>
-            <Link to="/list-employee">List</Link>
-            <Link to="/add-employee">Add</Link>
+            <Link to="/list-employee">Employee List</Link>
+            <Link to="/add-employee">Add Employee</Link>
+            <Link to="/list-department">Department List</Link>
+            <Link to="/add-department">Add Department</Link>
           </>
         ) : (
           <>
