@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, TableHead, TableCell, TableRow, Typography, Paper } from '@mui/material';
-
+import Menu from '../elements/menu';
 
 
 const EmployeeList = () => {
@@ -22,6 +22,7 @@ const EmployeeList = () => {
 
   return (
     <Paper>
+      <Menu />
       <Typography variant="h4" align="center">Employee List</Typography>
       {error && <p>{error}</p>}
       <Table>
