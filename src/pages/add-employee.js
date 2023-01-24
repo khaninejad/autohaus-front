@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Grid } from '@mui/material';
+import { TextField, Button, Grid, Paper } from '@mui/material';
+import Menu from '../elements/menu';
 
 const AddEmployee = (props) => {
   const [lastName, setLastName] = useState('');
@@ -31,6 +32,8 @@ const AddEmployee = (props) => {
   }
 
   return (
+    <Paper>
+    <Menu />
     <form onSubmit={handleSubmit}>
       <Grid container spacing={1}>
         <Grid item xs={12}>
@@ -82,6 +85,7 @@ const AddEmployee = (props) => {
         </Grid>
       </Grid>
     </form>
+    </Paper>
   );
 };
 

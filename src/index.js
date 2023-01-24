@@ -26,7 +26,6 @@ root.render(
       <Route path="/list-employee" element={<EmployeeList />} />
       <Route path="/add-department" element={<AddDepartment />} />
       <Route path="/list-department" element={<DepartmentList />} />
-     
     </Routes>
   </BrowserRouter>
 </React.StrictMode>,
