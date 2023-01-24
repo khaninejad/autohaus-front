@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 const SignIn = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -13,8 +13,8 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/signin', { email, password });
-      localStorage.setItem('token', res.data.token);
+      const res = await axios.post('http://localhost:4000/api/signin', { username, password });
+      localStorage.setItem('token', res.data.access_token);
       navigate("/home");
     } catch (err) {
       setError("Invalid Email or Password");
@@ -26,8 +26,8 @@ const SignIn = () => {
       <TextField
         label="Email"
         type="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
+        value={username}
+        onChange={e => setUsername(e.target.value)}
         margin="normal"
         fullWidth
       />

@@ -14,9 +14,8 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/signup', { name, email, password });
-      localStorage.setItem('token', res.data.token);
-      navigate("/home");
+      await axios.post('http://localhost:4000/api/signup', { name, email, password });
+      navigate("/signin");
     } catch (err) {
       setError(err.response.data.message);
     }
