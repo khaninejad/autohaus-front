@@ -23,7 +23,7 @@ const DepartmentList = () => {
       }
   }
     fetchData();
-  }, []);
+  }, [token]);
 
   return (
     <Paper>
