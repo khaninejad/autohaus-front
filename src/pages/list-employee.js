@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 import { Table, TableHead, TableCell, TableRow, Typography, Paper } from '@mui/material';
 import Menu from '../elements/menu';
 import configuration from '../shared/config';
@@ -30,6 +31,8 @@ const EmployeeList = () => {
     <Paper>
       <Menu />
       <Typography variant="h4" align="center">Employee List</Typography>
+      <Link to="/add-employee">Add Employee</Link>
+      <Link to="/import-employees">Import Employee</Link>
       {error && <p>{error}</p>}
       <Table>
         <TableHead>

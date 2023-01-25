@@ -36,7 +36,6 @@ const Menu = () => {
           <>
             <Link to="/home">Home</Link>
             <Link to="/list-employee">Employee List</Link>
-            <Link to="/add-employee">Add Employee</Link>
             <Link to="/list-department">Department List</Link>
           </>
         ) : (
