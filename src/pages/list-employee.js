@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Table, TableHead, TableCell, TableRow, Typography, Paper } from '@mui/material';
 import Menu from '../elements/menu';
+import EmployeeModal from './employee-modal';
+import EmployeeHistoryModal from './employee-history-moda';
 import configuration from '../shared/config';
 
 
@@ -42,6 +44,7 @@ const EmployeeList = () => {
             <TableCell>Address</TableCell>
             <TableCell>Job Title</TableCell>
             <TableCell>Department</TableCell>
+            <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         <tbody>
@@ -52,6 +55,8 @@ const EmployeeList = () => {
               <TableCell>{employee.address}</TableCell>
               <TableCell>{employee.job_title}</TableCell>
               <TableCell>{employee.department?.name}</TableCell>
+              <EmployeeModal employeeId={employee._id} />
+              <EmployeeHistoryModal employeeId={employee._id} />
             </TableRow>
           ))}
         </tbody>
