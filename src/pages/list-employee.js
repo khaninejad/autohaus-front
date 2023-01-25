@@ -8,11 +8,16 @@ import configuration from '../shared/config';
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
   const [error, setError] = useState('');
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${configuration().api_url}api/employees`);
+        const res = await axios.get(`${configuration().api_url}api/employee`, {
+              headers: {
+                  'Authorization': `Bearer ${token}`
+              }
+          });
         setEmployees(res.data);
       } catch (err) {
         setError(err.response.data.message);
@@ -39,11 +44,11 @@ const EmployeeList = () => {
         <tbody>
           {employees.map(employee => (
             <TableRow key={employee._id}>
-              <TableCell>{employee.lastName}</TableCell>
-              <TableCell>{employee.firstName}</TableCell>
+              <TableCell>{employee.last_name}</TableCell>
+              <TableCell>{employee.first_name}</TableCell>
               <TableCell>{employee.address}</TableCell>
-              <TableCell>{employee.jobTitle}</TableCell>
-              <TableCell>{employee.department}</TableCell>
+              <TableCell>{employee.job_title}</TableCell>
+              <TableCell>{employee.department?.name}</TableCell>
             </TableRow>
           ))}
         </tbody>
