@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import configuration from '../shared/config';
-import { Table, TableBody, TableHead, TableCell, TableRow, Paper } from '@mui/material';
+import { Table, TableBody, TableHead, TableCell, TableRow } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -22,7 +22,7 @@ const style = {
 
 const EmployeeHistoryModal = ({ employeeId }) => {
   const [open, setOpen] = React.useState(false);
-  const [employee, setEmployee] = React.useState({});
+  const [history, setHistory] = React.useState([]);
   const [error, setError] = React.useState('');
   const token = localStorage.getItem('token');
 
@@ -34,13 +34,13 @@ const EmployeeHistoryModal = ({ employeeId }) => {
             'Authorization': `Bearer ${token}`
           }
         });
-        setEmployee(res.data);
+        setHistory(res.data);
       } catch (err) {
         setError(err.response.data.message);
       }
     }
     fetchData();
-  }, [employeeId]);
+  }, [employeeId, token]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -52,7 +52,7 @@ const EmployeeHistoryModal = ({ employeeId }) => {
 
   return (
     <React.Fragment>
-      <Button onClick={handleOpen}>History</Button>
+      <td><Button onClick={handleOpen}>History</Button></td>
       <Modal
         open={open}
         onClose={handleClose}
@@ -60,6 +60,7 @@ const EmployeeHistoryModal = ({ employeeId }) => {
         aria-describedby="employee-modal-description"
       >
         <Box sx={{ ...style, width: 400 }}>
+        {error && <p>{error}</p>}
           <Table>
             <TableHead>
               <TableRow>
@@ -69,11 +70,11 @@ const EmployeeHistoryModal = ({ employeeId }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {employee.map((history, index) => (
+              {history.map((item, index) => (
                 <TableRow key={index}>
-                  <TableCell>{history.action}</TableCell>
-                  <TableCell>{history.user.name}</TableCell>
-                  <TableCell>{history.created_at}</TableCell>
+                  <TableCell>{item.action}</TableCell>
+                  <TableCell>{item.user.name}</TableCell>
+                  <TableCell>{item.created_at}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

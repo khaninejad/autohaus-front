@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '@mui/material';
 import Modal from '@mui/material/Modal';
@@ -39,7 +39,7 @@ const EmployeeModal = ({ employeeId }) => {
       }
     }
     fetchData();
-  }, [employeeId]);
+  }, [employeeId, token]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -51,7 +51,7 @@ const EmployeeModal = ({ employeeId }) => {
 
   return (
     <React.Fragment>
-      <Button onClick={handleOpen}>Detail</Button>
+      <td><Button onClick={handleOpen}>Detail</Button></td>
       <Modal
         open={open}
         onClose={handleClose}
@@ -60,6 +60,7 @@ const EmployeeModal = ({ employeeId }) => {
       >
         <Box sx={{ ...style, width: 400 }}>
           <h2 id="employee-modal-title">{employee.first_name} {employee.last_name}</h2>
+          {error && <p>{error}</p>}
           <p id="employee-modal-description">
             Address: {employee.address}
             <br />
