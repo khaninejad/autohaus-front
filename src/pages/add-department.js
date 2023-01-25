@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography, Paper } from '@mui/material';
 import Menu from '../elements/menu';
+import configuration from '../shared/config';
 
 const AddDepartment = () => {
   const [name, setName] = useState('');
@@ -14,7 +15,7 @@ const AddDepartment = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const res = await axios.post('http://localhost:4000/api/department', { name, description }, {
+      const res = await axios.post(`${configuration().api_url}api/department`, { name, description }, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

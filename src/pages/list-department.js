@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Table, TableHead, TableCell, TableRow, Typography, Paper } from '@mui/material';
 import Menu from '../elements/menu';
+import configuration from '../shared/config';
 
 const DepartmentList = () => {
   const [departments, setDepartments] = useState([]);
@@ -12,7 +13,7 @@ const DepartmentList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-          const res = await axios.get('http://localhost:4000/api/department', {
+          const res = await axios.get(`${configuration().api_url}api/department`, {
               headers: {
                   'Authorization': `Bearer ${token}`
               }

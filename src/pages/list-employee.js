@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, TableHead, TableCell, TableRow, Typography, Paper } from '@mui/material';
 import Menu from '../elements/menu';
+import configuration from '../shared/config';
 
 
 const EmployeeList = () => {
@@ -11,7 +12,7 @@ const EmployeeList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('/api/employees');
+        const res = await axios.get(`${configuration().api_url}api/employees`);
         setEmployees(res.data);
       } catch (err) {
         setError(err.response.data.message);
