@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Input, Button, MenuItem, FormControl } from '@mui/material';
+import { Input, Button, MenuItem, FormControl, Grid, Paper, Alert } from '@mui/material';
+import Menu from '../../elements/menu';
 import configuration from '../../shared/config';
 import { useNavigate, useParams } from 'react-router-dom';
 import Select from "react-select";
@@ -67,29 +68,60 @@ const EditEmployee = () => {
 
 
     return (
-        <form>
-            {error && <p>{error}</p>}
-            <Input label="First Name" value={employee.first_name} onChange={e => setEmployee({ ...employee, first_name: e.target.value })} />
-            <Input label="Last Name" value={employee.last_name} onChange={e => setEmployee({ ...employee, last_name: e.target.value })} />
-            <Input label="Address" value={employee.address} onChange={e => setEmployee({ ...employee, address: e.target.value })} />
-            <Input label="job_title" value={employee.job_title} onChange={e => setEmployee({ ...employee, job_title: e.target.value })} />
-            <FormControl fullWidth>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    options={options}
-                    value={options.find(option => option.value === employee.department)}
-                    onChange={(selectedOption) => setEmployee({ ...employee, department: selectedOption.value })}
-                >
-                    {options.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-            <Button onClick={handleSubmit}>Save</Button>
-        </form>
+        <Paper>
+            <Menu />
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+                style={{ minHeight: '50vh' }}
+            >
+
+                <Grid item xs={3}>
+                    <form>
+                        {error && <Alert severity="error">{error}</Alert>}
+                        <Grid container spacing={1}>
+                            <Grid item xs={12}>
+                                <Input label="First Name" value={employee.first_name} onChange={e => setEmployee({ ...employee, first_name: e.target.value })} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Input label="Last Name" value={employee.last_name} onChange={e => setEmployee({ ...employee, last_name: e.target.value })} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Input label="Address" value={employee.address} onChange={e => setEmployee({ ...employee, address: e.target.value })} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Input label="job_title" value={employee.job_title} onChange={e => setEmployee({ ...employee, job_title: e.target.value })} />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <FormControl fullWidth>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        options={options}
+                                        value={options.find(option => option.value === employee.department)}
+                                        onChange={(selectedOption) => setEmployee({ ...employee, department: selectedOption.value })}
+                                    >
+                                        {options.map((option) => (
+                                            <MenuItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button onClick={handleSubmit} variant="contained" color="primary">Save</Button>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </Grid>
+
+            </Grid >
+
+        </Paper >
     );
 };
 
