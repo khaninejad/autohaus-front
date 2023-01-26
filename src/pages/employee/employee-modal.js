@@ -71,6 +71,16 @@ const EmployeeModal = ({ employeeId }) => {
             Job Title: {employee.job_title}
             <br />
             Department: {employee.department?.name}
+            <br />
+            Street: {employee.street}
+            <br />
+            Nr: {employee.nr}
+            <br />
+            PLZ: {employee.plz}
+            <br />
+            Ort: {employee.ort}
+            <br />
+            Land: {employee.land}
           </p>
           <Button onClick={handleClose}>Close</Button>
         </Box>
