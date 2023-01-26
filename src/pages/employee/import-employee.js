@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Paper, Typography, Button, Input } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import configuration from '../shared/config';
+import configuration from '../../shared/config';
 
 const ImportEmployees = () => {
     const [file, setFile] = useState(null);

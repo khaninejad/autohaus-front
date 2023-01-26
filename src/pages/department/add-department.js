@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography, Paper } from '@mui/material';
-import Menu from '../elements/menu';
-import configuration from '../shared/config';
+import Menu from '../../elements/menu';
+import configuration from '../../shared/config';
 
 const AddDepartment = () => {
   const [name, setName] = useState('');

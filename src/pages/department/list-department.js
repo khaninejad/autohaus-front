@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Table, TableHead, TableCell, TableRow, Typography, Paper } from '@mui/material';
-import Menu from '../elements/menu';
-import configuration from '../shared/config';
+import Menu from '../../elements/menu';
+import configuration from '../../shared/config';
 
 const DepartmentList = () => {
   const [departments, setDepartments] = useState([]);

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Table, TableHead, TableCell, TableRow, Typography, Paper, FormControl, MenuItem } from '@mui/material';
-import Menu from '../elements/menu';
+import Menu from '../../elements/menu';
 import Select from "react-select";
 import EmployeeModal from './employee-modal';
-import EmployeeHistoryModal from './employee-history-moda';
-import configuration from '../shared/config';
+import EmployeeHistoryModal from './employee-history-modal';
+import configuration from '../../shared/config';
 
 
 const EmployeeList = () => {

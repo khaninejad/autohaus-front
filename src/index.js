@@ -8,11 +8,11 @@ import Menu from './elements/menu';
 import SignIn from './auth/sign-in';
 import SignUp from './auth/sign-up';
 import Home from './pages/home';
-import AddEmployee from './pages/add-employee';
-import EmployeeList from './pages/list-employee';
-import AddDepartment from './pages/add-department';
-import DepartmentList from './pages/list-department';
-import ImportEmployees from './pages/import-employee';
+import AddEmployee from './pages/employee/add-employee';
+import EmployeeList from './pages/employee/list-employee';
+import AddDepartment from './pages/department/add-department';
+import DepartmentList from './pages/department/list-department';
+import ImportEmployees from './pages/employee/import-employee';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

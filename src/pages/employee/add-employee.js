@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Grid, Paper, FormControl, MenuItem } from '@mui/material';
 import Select from "react-select";
-import Menu from '../elements/menu';
-import configuration from '../shared/config';
+import Menu from '../../elements/menu';
+import configuration from '../../shared/config';
 
 const AddEmployee = (props) => {
   const [last_name, setLastName] = useState('');

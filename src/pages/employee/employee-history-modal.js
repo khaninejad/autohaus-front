@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { Button } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import configuration from '../shared/config';
-import { Table, TableBody, TableHead, TableCell, TableRow } from '@mui/material';
+import configuration from '../../shared/config';
+import { Table, TableBody, TableHead, TableCell, TableRow, Button } from '@mui/material';
 
 const style = {
   position: 'absolute',
