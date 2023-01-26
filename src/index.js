@@ -13,6 +13,7 @@ import EmployeeList from './pages/employee/list-employee';
 import AddDepartment from './pages/department/add-department';
 import DepartmentList from './pages/department/list-department';
 import ImportEmployees from './pages/employee/import-employee';
+import EditDepartment from './pages/department/edit-department';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
       <Route path="/list-employee" element={<EmployeeList />} />
       <Route path="/add-department" element={<AddDepartment />} />
       <Route path="/list-department" element={<DepartmentList />} />
+      <Route path="/edit-department/:id" element={<EditDepartment />} />
       <Route path="/import-employees" element={<ImportEmployees />} />
     </Routes>
   </BrowserRouter>

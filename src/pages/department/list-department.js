@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { Table, TableHead, TableCell, TableRow, Typography, Paper } from '@mui/material';
+import { Table, TableHead, TableCell, TableRow, Typography, Paper, Button } from '@mui/material';
 import Menu from '../../elements/menu';
 import configuration from '../../shared/config';
 
@@ -25,7 +25,16 @@ const DepartmentList = () => {
       }
     }
   }
-
+  const handleEdit = (department) => {
+    return (
+      <div>
+        <Link to={{
+          pathname: `/edit-department/${department}`,
+          state: { department }
+        }}>Edit</Link>
+      </div>
+    );
+  }
 
 
   useEffect(() => {
@@ -61,13 +70,14 @@ const DepartmentList = () => {
         <tbody>
           {departments.map(department => (
             <TableRow key={department._id}>
-              <TableCell>{department.name}</TableCell>
-              <TableCell>{department.description}</TableCell>
-              <TableCell>
-                <button>Edit</button>
-                <button onClick={() => handleDelete(department._id)}>Delete</button>
-              </TableCell>
-            </TableRow>
+            <TableCell>{department.name}</TableCell>
+            <TableCell>{department.description}</TableCell>
+            <TableCell>
+              {handleEdit(department._id)}
+              <Button onClick={() => handleDelete(department._id)}>Delete</Button>
+            </TableCell>
+          </TableRow>
+          
           ))}
         </tbody>
       </Table>
