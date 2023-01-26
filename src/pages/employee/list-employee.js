@@ -2,12 +2,24 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Table, TableHead, TableCell, TableRow, Typography, Paper, FormControl, MenuItem, Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
 import Menu from '../../elements/menu';
 import Select from "react-select";
 import EmployeeModal from './employee-modal';
 import EmployeeHistoryModal from './employee-history-modal';
 import configuration from '../../shared/config';
 
+const Item = styled('div')(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  border: '0px solid',
+  borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
+  padding: theme.spacing(1),
+  borderRadius: '4px',
+  textAlign: 'center',
+}));
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
@@ -45,15 +57,15 @@ const EmployeeList = () => {
   useEffect(() => {
     let apiUrl = `${configuration().api_url}api/employee`;
     if (department) {
-        apiUrl = `${configuration().api_url}api/employee?department=${department}`;
+      apiUrl = `${configuration().api_url}api/employee?department=${department}`;
     }
     const fetchData = async () => {
       try {
         const res = await axios.get(apiUrl, {
-              headers: {
-                  'Authorization': `Bearer ${token}`
-              }
-          });
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         setEmployees(res.data);
       } catch (err) {
         setError(err.response.data.message);
@@ -65,11 +77,11 @@ const EmployeeList = () => {
       try {
         const res = await axios.get(`${configuration().api_url}api/department`, {
           headers: {
-              'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
           }
-      });
-      console.log(res);
-        setOptions(res.data.map(department => ({value: department._id, label: department.name})));
+        });
+        console.log(res);
+        setOptions(res.data.map(department => ({ value: department._id, label: department.name })));
       } catch (err) {
         console.log(err);
       }
@@ -81,22 +93,35 @@ const EmployeeList = () => {
     <Paper>
       <Menu />
       <Typography variant="h4" align="center">Employee List</Typography>
-      <Link to="/add-employee">Add Employee</Link>
-      <Link to="/import-employees">Import Employee</Link>
-      <FormControl fullWidth> 
-        <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      options={options}
-      onChange={(selectedOption) => setDepartment(selectedOption.value)}
-    >
-      {options.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
-    </Select>
-        </FormControl>
+      <br/>
+      <Box sx={{ flexGrow: 1, }}>
+      <Grid container spacing={2}>
+        <Grid xs={2}>
+          <Item><Link to="/add-employee"> <Button variant="contained" color="primary">
+          Add Employee
+        </Button></Link></Item>
+        </Grid>
+        <Grid xs={2}>
+          <Item><Link to="/import-employees"><Button variant="contained" color="primary">
+          Import Employee
+        </Button></Link></Item>
+        </Grid>
+        <Grid xs={3}>
+          <Item><Select
+        variant="contained" 
+          options={options}
+          onChange={(selectedOption) => setDepartment(selectedOption.value)}
+        >
+          {options.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select></Item>
+        </Grid>
+      </Grid>
+    </Box>
+
       {error && <p>{error}</p>}
       <Table>
         <TableHead>
