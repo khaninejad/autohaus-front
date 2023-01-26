@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import configuration from '../../shared/config';
 
 const SignIn = () => {
   const [username, setUsername] = useState('');
@@ -13,7 +14,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:4000/api/signin', { username, password });
+      const res = await axios.post(`${configuration().api_url}api/signin`, { username, password });
       localStorage.setItem('token', res.data.access_token);
       navigate("/home");
     } catch (err) {
