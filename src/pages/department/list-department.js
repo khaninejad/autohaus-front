@@ -10,19 +10,37 @@ const DepartmentList = () => {
   const [error, setError] = useState('');
   const token = localStorage.getItem('token');
 
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this department?")) {
+      try {
+        await axios.delete(`${configuration().api_url}api/department/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        setDepartments(departments.filter(department => department._id !== id));
+      } catch (err) {
+        console.error(err);
+        setError(err.response.data.message);
+      }
+    }
+  }
+
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-          const res = await axios.get(`${configuration().api_url}api/department`, {
-              headers: {
-                  'Authorization': `Bearer ${token}`
-              }
-          });
-          setDepartments(res.data);
+        const res = await axios.get(`${configuration().api_url}api/department`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        setDepartments(res.data);
       } catch (err) {
-          setError(err.response.data.message);
+        setError(err.response.data.message);
       }
-  }
+    }
     fetchData();
   }, [token]);
 
@@ -37,6 +55,7 @@ const DepartmentList = () => {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Description</TableCell>
+            <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>
         <tbody>
@@ -44,6 +63,10 @@ const DepartmentList = () => {
             <TableRow key={department._id}>
               <TableCell>{department.name}</TableCell>
               <TableCell>{department.description}</TableCell>
+              <TableCell>
+                <button>Edit</button>
+                <button onClick={() => handleDelete(department._id)}>Delete</button>
+              </TableCell>
             </TableRow>
           ))}
         </tbody>
