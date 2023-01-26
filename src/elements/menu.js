@@ -1,7 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  CssBaseline,
+  IconButton,
+  Typography,
+  makeStyles,
+} from "@material-ui/core";
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import Button from '@mui/material/Button';
+
+const useStyles = makeStyles((theme) => ({
+  navlinks: {
+    marginLeft: theme.spacing(10),
+    display: "flex",
+  },
+ logo: {
+    flexGrow: "1",
+    cursor: "pointer",
+  },
+  link: {
+    textDecoration: "none",
+    color: "white",
+    fontSize: "20px",
+    marginLeft: theme.spacing(1),
+    "&:hover": {
+      color: "yellow",
+      borderBottom: "1px solid white",
+    },
+  },
+}));
 
 function HomeIcon(props: SvgIconProps) {
   return (
@@ -12,6 +41,7 @@ function HomeIcon(props: SvgIconProps) {
 }
 
 const Menu = () => {
+  const classes = useStyles();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -23,7 +53,7 @@ const Menu = () => {
   }, []);
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" >
       <Toolbar>
         <IconButton edge="start" color="inherit" aria-label="menu">
           <HomeIcon />
@@ -31,18 +61,18 @@ const Menu = () => {
         <Typography variant="h6">
           {isLoggedIn ? "Welcome" : "Please Login"}
         </Typography>
-        <div style={{ flexGrow: 1 }} />
+        <div style={{ flexGrow: 1 }} className={classes.navlinks} />
         {isLoggedIn ? (
           <>
-            <Link to="/home">Home</Link>
-            <Link to="/list-employee">Employee List</Link>
-            <Link to="/list-department">Department List</Link>
+            <Link className={classes.link} to="/home" >Home</Link>
+            <Link className={classes.link} to="/list-employee">Employee List</Link>
+            <Link className={classes.link} to="/list-department">Department List</Link>
           </>
         ) : (
           <>
-            <Link to="/">Home</Link>
-            <Link to="/signIn">SignIn</Link>
-            <Link to="/signUp">signup</Link>
+            <Link className={classes.link} to="/">Home</Link>
+            <Link className={classes.link} to="/signIn">SignIn</Link>
+            <Link className={classes.link} to="/signUp">signup</Link>
           </>
         )}
       </Toolbar>
