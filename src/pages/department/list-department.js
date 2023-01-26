@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { Table, TableHead, TableCell, TableRow, Typography, Paper, Button } from '@mui/material';
+import { Table, TableHead, TableCell, TableRow, Typography, Paper } from '@mui/material';
 import Menu from '../../elements/menu';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import configuration from '../../shared/config';
+import Stack from '@mui/material/Stack';
 
 const DepartmentList = () => {
   const [departments, setDepartments] = useState([]);
@@ -31,7 +35,9 @@ const DepartmentList = () => {
         <Link to={{
           pathname: `/edit-department/${department}`,
           state: { department }
-        }}>Edit</Link>
+        }}><IconButton color="secondary" aria-label="edit">
+            <EditIcon />
+          </IconButton></Link>
       </div>
     );
   }
@@ -70,14 +76,18 @@ const DepartmentList = () => {
         <tbody>
           {departments.map(department => (
             <TableRow key={department._id}>
-            <TableCell>{department.name}</TableCell>
-            <TableCell>{department.description}</TableCell>
-            <TableCell>
-              {handleEdit(department._id)}
-              <Button onClick={() => handleDelete(department._id)}>Delete</Button>
-            </TableCell>
-          </TableRow>
-          
+              <TableCell>{department.name}</TableCell>
+              <TableCell>{department.description}</TableCell>
+              <TableCell>
+              <Stack direction="row" spacing={1}>
+                <IconButton aria-label="delete" onClick={() => handleDelete(department._id)}>
+                  <DeleteIcon />
+                </IconButton>
+                {handleEdit(department._id)}
+                </Stack>
+              </TableCell>
+            </TableRow>
+
           ))}
         </tbody>
       </Table>

@@ -9,7 +9,11 @@ import Menu from '../../elements/menu';
 import Select from "react-select";
 import EmployeeModal from './employee-modal';
 import EmployeeHistoryModal from './employee-history-modal';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import configuration from '../../shared/config';
+import Stack from '@mui/material/Stack';
 
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -48,7 +52,9 @@ const EmployeeList = () => {
         <Link to={{
           pathname: `/edit-employee/${employee}`,
           state: { employee }
-        }}>Edit</Link>
+        }}><IconButton color="secondary" aria-label="edit">
+        <EditIcon />
+      </IconButton></Link>
       </div>
     );
   }
@@ -139,10 +145,13 @@ const EmployeeList = () => {
               <TableCell>{employee.first_name}</TableCell>
               <TableCell>{employee.job_title}</TableCell>
               <TableCell>{employee.department?.name}</TableCell>
-              <TableCell><EmployeeModal employeeId={employee._id} />
+              <TableCell>
+              <Stack direction="row" spacing={0}>
+                <EmployeeModal employeeId={employee._id} />
                 <EmployeeHistoryModal employeeId={employee._id} />
                 {handleEdit(employee._id)}
-                <Button onClick={() => handleDelete(employee._id)}>Delete</Button>
+                <IconButton aria-label="delete"  onClick={() => handleDelete(employee._id)}><DeleteIcon /></IconButton>
+                </Stack>
               </TableCell>
             </TableRow>
           ))}

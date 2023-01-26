@@ -4,6 +4,8 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import configuration from '../../shared/config';
 import { Table, TableBody, TableHead, TableCell, TableRow, Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import HistoryIcon from '@mui/icons-material/History';
 
 const style = {
   position: 'absolute',
@@ -51,7 +53,9 @@ const EmployeeHistoryModal = ({ employeeId }) => {
 
   return (
     <React.Fragment>
-      <td><Button onClick={handleOpen}>History</Button></td>
+      <td><Button onClick={handleOpen}><IconButton aria-label="history">
+        <HistoryIcon />
+      </IconButton></Button></td>
       <Modal
         open={open}
         onClose={handleClose}

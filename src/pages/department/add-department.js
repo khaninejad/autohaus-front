@@ -20,7 +20,7 @@ const AddDepartment = () => {
           'Authorization': `Bearer ${token}`
         }
       });
-      if(res.data.success) {
+      if(res) {
         setName('');
         setDescription('');
         navigate("/list-department");
@@ -39,24 +39,32 @@ const AddDepartment = () => {
   direction="column"
   alignItems="center"
   justifyContent="center"
-  style={{ minHeight: '100vh' }}
+  style={{ minHeight: '50vh' }}
 >
 
   <Grid item xs={3}>
       <form onSubmit={handleSubmit}>
-      {error && <Alert severity="error">{error}</Alert>}
-        <Typography variant="h4" align="center">Add Department</Typography>
+        <Typography variant="h4" align="left">Add Department</Typography>
+        {error && <Alert severity="error">{error}</Alert>}
+        <Grid container spacing={1}>
+            <Grid item xs={12}>
         <TextField
           label="Name"
           value={name}
           onChange={e => setName(e.target.value)}
         />
+        </Grid>
+        <Grid item xs={12}>
          <TextField
           label="Description"
           value={description}
           onChange={e => setDescription(e.target.value)}
         />
+         </Grid>
+         <Grid item xs={12}>
         <Button type="submit" variant="contained" color="primary">Add Department</Button>
+        </Grid>
+        </Grid>
       </form>
       </Grid>   
    

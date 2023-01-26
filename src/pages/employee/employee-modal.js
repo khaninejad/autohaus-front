@@ -4,20 +4,22 @@ import { Button } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import configuration from '../../shared/config';
+import IconButton from '@mui/material/IconButton';
+import ListIcon from '@mui/icons-material/List';
 
 const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    pt: 2,
-    px: 4,
-    pb: 3,
-  };
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
 
 const EmployeeModal = ({ employeeId }) => {
   const [open, setOpen] = React.useState(false);
@@ -29,10 +31,10 @@ const EmployeeModal = ({ employeeId }) => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`${configuration().api_url}api/employee/${employeeId}`, {
-              headers: {
-                  'Authorization': `Bearer ${token}`
-              }
-          });
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         setEmployee(res.data);
       } catch (err) {
         setError(err.response.data.message);
@@ -51,7 +53,9 @@ const EmployeeModal = ({ employeeId }) => {
 
   return (
     <React.Fragment>
-      <td><Button onClick={handleOpen}>Detail</Button></td>
+      <td><Button onClick={handleOpen}><IconButton aria-label="view">
+        <ListIcon />
+      </IconButton></Button></td>
       <Modal
         open={open}
         onClose={handleClose}
