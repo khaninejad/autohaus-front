@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Typography, Paper } from '@mui/material';
+import { TextField, Button, Typography, Paper, Grid, Alert } from '@mui/material';
 import Menu from '../../elements/menu';
 import configuration from '../../shared/config';
 
@@ -33,7 +33,18 @@ const AddDepartment = () => {
   return (
     <Paper>
       <Menu />
+      <Grid
+  container
+  spacing={0}
+  direction="column"
+  alignItems="center"
+  justifyContent="center"
+  style={{ minHeight: '100vh' }}
+>
+
+  <Grid item xs={3}>
       <form onSubmit={handleSubmit}>
+      {error && <Alert severity="error">{error}</Alert>}
         <Typography variant="h4" align="center">Add Department</Typography>
         <TextField
           label="Name"
@@ -46,8 +57,11 @@ const AddDepartment = () => {
           onChange={e => setDescription(e.target.value)}
         />
         <Button type="submit" variant="contained" color="primary">Add Department</Button>
-        {error && <p>{error}</p>}
       </form>
+      </Grid>   
+   
+   </Grid> 
+   
     </Paper>
   );
 };

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { Table, TableHead, TableCell, TableRow, Typography, Paper, FormControl, MenuItem, Button } from '@mui/material';
+import { Table, TableHead, TableCell, TableRow, Typography, Paper, MenuItem, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
 import Menu from '../../elements/menu';
 import Select from "react-select";
 import EmployeeModal from './employee-modal';
@@ -93,34 +92,34 @@ const EmployeeList = () => {
     <Paper>
       <Menu />
       <Typography variant="h4" align="center">Employee List</Typography>
-      <br/>
+      <br />
       <Box sx={{ flexGrow: 1, }}>
-      <Grid container spacing={2}>
-        <Grid xs={2}>
-          <Item><Link to="/add-employee"> <Button variant="contained" color="primary">
-          Add Employee
-        </Button></Link></Item>
+        <Grid container spacing={2}>
+          <Grid xs={2}>
+            <Item><Link to="/add-employee"> <Button variant="contained" color="primary">
+              Add Employee
+            </Button></Link></Item>
+          </Grid>
+          <Grid xs={2}>
+            <Item><Link to="/import-employees"><Button variant="contained" color="primary">
+              Import Employee
+            </Button></Link></Item>
+          </Grid>
+          <Grid xs={3}>
+            <Item><Select
+              variant="contained"
+              options={options}
+              onChange={(selectedOption) => setDepartment(selectedOption.value)}
+            >
+              {options.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select></Item>
+          </Grid>
         </Grid>
-        <Grid xs={2}>
-          <Item><Link to="/import-employees"><Button variant="contained" color="primary">
-          Import Employee
-        </Button></Link></Item>
-        </Grid>
-        <Grid xs={3}>
-          <Item><Select
-        variant="contained" 
-          options={options}
-          onChange={(selectedOption) => setDepartment(selectedOption.value)}
-        >
-          {options.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select></Item>
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
 
       {error && <p>{error}</p>}
       <Table>
@@ -128,7 +127,6 @@ const EmployeeList = () => {
           <TableRow>
             <TableCell>Last Name</TableCell>
             <TableCell>First Name</TableCell>
-            <TableCell>Address</TableCell>
             <TableCell>Job Title</TableCell>
             <TableCell>Department</TableCell>
             <TableCell>Actions</TableCell>
@@ -139,13 +137,13 @@ const EmployeeList = () => {
             <TableRow key={employee._id}>
               <TableCell>{employee.last_name}</TableCell>
               <TableCell>{employee.first_name}</TableCell>
-              <TableCell>{employee.address}</TableCell>
               <TableCell>{employee.job_title}</TableCell>
               <TableCell>{employee.department?.name}</TableCell>
-              <EmployeeModal employeeId={employee._id} />
-              <EmployeeHistoryModal employeeId={employee._id} />
-              {handleEdit(employee._id)}
-              <Button onClick={() => handleDelete(employee._id)}>Delete</Button>
+              <TableCell><EmployeeModal employeeId={employee._id} />
+                <EmployeeHistoryModal employeeId={employee._id} />
+                {handleEdit(employee._id)}
+                <Button onClick={() => handleDelete(employee._id)}>Delete</Button>
+              </TableCell>
             </TableRow>
           ))}
         </tbody>

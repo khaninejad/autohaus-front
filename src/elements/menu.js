@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
-  CssBaseline,
   IconButton,
   Typography,
   makeStyles,
 } from "@material-ui/core";
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import Button from '@mui/material/Button';
 
 const useStyles = makeStyles((theme) => ({
   navlinks: {
