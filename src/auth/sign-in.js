@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import configuration from '../../shared/config';
+import configuration from '../shared/config';
 
 const SignIn = () => {
   const [username, setUsername] = useState('');
