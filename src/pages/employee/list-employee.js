@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { Table, TableHead, TableCell, TableRow, Typography, Paper, FormControl, MenuItem } from '@mui/material';
+import { Table, TableHead, TableCell, TableRow, Typography, Paper, FormControl, MenuItem, Button } from '@mui/material';
 import Menu from '../../elements/menu';
 import Select from "react-select";
 import EmployeeModal from './employee-modal';
@@ -15,6 +15,32 @@ const EmployeeList = () => {
   const [options, setOptions] = useState([]);
   const [department, setDepartment] = useState('');
   const token = localStorage.getItem('token');
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this employee?")) {
+      try {
+        await axios.delete(`${configuration().api_url}api/employee/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        setEmployees(employees.filter(item => item._id !== id));
+      } catch (err) {
+        console.error(err);
+        setError(err.response.data.message);
+      }
+    }
+  }
+  const handleEdit = (employee) => {
+    return (
+      <div>
+        <Link to={{
+          pathname: `/edit-employee/${employee}`,
+          state: { employee }
+        }}>Edit</Link>
+      </div>
+    );
+  }
 
   useEffect(() => {
     let apiUrl = `${configuration().api_url}api/employee`;
@@ -93,6 +119,8 @@ const EmployeeList = () => {
               <TableCell>{employee.department?.name}</TableCell>
               <EmployeeModal employeeId={employee._id} />
               <EmployeeHistoryModal employeeId={employee._id} />
+              {handleEdit(employee._id)}
+              <Button onClick={() => handleDelete(employee._id)}>Delete</Button>
             </TableRow>
           ))}
         </tbody>
