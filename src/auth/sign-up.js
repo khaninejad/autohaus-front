@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { TextField, Button, Paper, Grid, Alert } from '@mui/material';
+import Menu from '../elements/menu';
 import configuration from '../shared/config';
 
 const SignUp = () => {
@@ -23,7 +23,20 @@ const SignUp = () => {
   }
 
   return (
+    <Paper>
+    <Menu />
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      style={{ minHeight: '50vh' }}
+    >
+
+      <Grid item xs={3}>
     <form onSubmit={handleSubmit}>
+    {error && <Alert severity="error">{error}</Alert>}
       <TextField
         label="Name"
         type="text"
@@ -57,6 +70,11 @@ const SignUp = () => {
       </Button>
       {error && <p>{error}</p>}
     </form>
+    </Grid>
+
+</Grid>
+
+</Paper>
   );
 };
 export default SignUp;
