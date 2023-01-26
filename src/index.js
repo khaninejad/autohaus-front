@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Menu from './elements/menu';
 import SignIn from './auth/sign-in';
 import SignUp from './auth/sign-up';
+import Signout from './auth/signout';
 import Home from './pages/home';
 import AddEmployee from './pages/employee/add-employee';
 import EmployeeList from './pages/employee/list-employee';
@@ -25,6 +26,7 @@ root.render(
       <Route path="/home" element={<Home />} />
       <Route path="/signIn" element={<SignIn />} />
       <Route path="/signUp" element={<SignUp />} />
+      <Route path="/signOut" element={<Signout />} />
       <Route path="/add-employee" element={<AddEmployee />} />
       <Route path="/list-employee" element={<EmployeeList />} />
       <Route path="/add-department" element={<AddDepartment />} />

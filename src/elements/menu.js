@@ -65,6 +65,7 @@ const Menu = () => {
             <Link className={classes.link} to="/home" >Home</Link>
             <Link className={classes.link} to="/list-employee">Employee List</Link>
             <Link className={classes.link} to="/list-department">Department List</Link>
+            <Link className={classes.link} to="/signout">Sign out</Link>
           </>
         ) : (
           <>
