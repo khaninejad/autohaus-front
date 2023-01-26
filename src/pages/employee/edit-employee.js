@@ -8,7 +8,7 @@ import Select from "react-select";
 
 const EditEmployee = () => {
     const { id } = useParams();
-    const [employee, setEmployee] = useState({ first_name: '', last_name: '', address: '', job_title: '', department: '' });
+    const [employee, setEmployee] = useState({ first_name: '', last_name: '', address: '', job_title: '', department: '', street: '', nr: '', plz: '', ort: '', land: '' });
     const [options, setOptions] = useState([]);
     const [error, setError] = useState('');
     const token = localStorage.getItem('token');
@@ -84,13 +84,25 @@ const EditEmployee = () => {
                         {error && <Alert severity="error">{error}</Alert>}
                         <Grid container spacing={1}>
                             <Grid item xs={12}>
-                                <Input label="First Name" value={employee.first_name} onChange={e => setEmployee({ ...employee, first_name: e.target.value })} />
+                                <Input required label="First Name" value={employee.first_name} onChange={e => setEmployee({ ...employee, first_name: e.target.value })} />
                             </Grid>
                             <Grid item xs={12}>
-                                <Input label="Last Name" value={employee.last_name} onChange={e => setEmployee({ ...employee, last_name: e.target.value })} />
+                                <Input required label="Last Name" value={employee.last_name} onChange={e => setEmployee({ ...employee, last_name: e.target.value })} />
                             </Grid>
                             <Grid item xs={12}>
-                                <Input label="Address" value={employee.address} onChange={e => setEmployee({ ...employee, address: e.target.value })} />
+                                <Input label="Street" value={employee.street} onChange={e => setEmployee({ ...employee, street: e.target.value })} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Input label="Nr" value={employee.nr} onChange={e => setEmployee({ ...employee, nr: e.target.value })} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Input label="PLZ" value={employee.plz} onChange={e => setEmployee({ ...employee, plz: e.target.value })} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Input label="Ort" value={employee.ort} onChange={e => setEmployee({ ...employee, ort: e.target.value })} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Input label="Land" value={employee.land} onChange={e => setEmployee({ ...employee, land: e.target.value })} />
                             </Grid>
                             <Grid item xs={12}>
                                 <Input label="job_title" value={employee.job_title} onChange={e => setEmployee({ ...employee, job_title: e.target.value })} />

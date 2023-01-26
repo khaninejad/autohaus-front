@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Grid, Paper, FormControl, MenuItem, Alert } from '@mui/material';
+import { TextField, Button, Grid, Paper, FormControl, MenuItem, Alert, Typography } from '@mui/material';
 import Select from "react-select";
 import Menu from '../../elements/menu';
 import configuration from '../../shared/config';
@@ -9,9 +9,13 @@ import configuration from '../../shared/config';
 const AddEmployee = (props) => {
   const [last_name, setLastName] = useState('');
   const [first_name, setFirstName] = useState('');
-  const [address, setAddress] = useState('');
   const [job_title, setJobTitle] = useState('');
   const [department, setDepartment] = useState('');
+  const [street, setStreet] = useState('');
+  const [nr, setNr] = useState('');
+  const [plz, setPlz] = useState('');
+  const [ort, setOrt] = useState('');
+  const [land, setLand] = useState('');
   const [error, setError] = useState('');
   const [options, setOptions] = useState([]);
   const token = localStorage.getItem('token');
@@ -41,7 +45,11 @@ const AddEmployee = (props) => {
       const res = await axios.post(`${configuration().api_url}api/employee/`, {
         last_name,
         first_name,
-        address,
+        street,
+        nr,
+        plz,
+        ort,
+        land,
         job_title,
         department
       }, {
@@ -68,69 +76,109 @@ const AddEmployee = (props) => {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        style={{ minHeight: '60vh' }}
+        style={{ minHeight: '50vh' }}
       >
-        <form onSubmit={handleSubmit}>
-        {error && <Alert severity="error">{error}</Alert>}
-          <Grid container spacing={1}>
-            <Grid item xs={12}>
-              <TextField
-                label="Last Name"
-                placeholder="Last Name"
-                value={last_name}
-                onChange={e => setLastName(e.target.value)}
-              />
+
+        <Grid item xs={3}>
+          <form onSubmit={handleSubmit}>
+            <Typography variant="h4" align="left">Add Department</Typography>
+            {error && <Alert severity="error">{error}</Alert>}
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <TextField
+                  required="true"
+                  label="Last Name"
+                  placeholder="Last Name"
+                  value={last_name}
+                  onChange={e => setLastName(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required="true"
+                  label="First Name"
+                  placeholder="First Name"
+                  value={first_name}
+                  onChange={e => setFirstName(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Street"
+                  placeholder="Street"
+                  value={street}
+                  onChange={e => setStreet(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Nr"
+                  placeholder="Nr"
+                  value={nr}
+                  onChange={e => setNr(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="PLZ"
+                  placeholder="PLZ"
+                  value={plz}
+                  onChange={e => setPlz(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Ort"
+                  placeholder="Ort"
+                  value={ort}
+                  onChange={e => setOrt(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Land"
+                  placeholder="Land"
+                  value={land}
+                  onChange={e => setLand(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="text"
+                  placeholder="Job Title"
+                  value={job_title}
+                  onChange={e => setJobTitle(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <FormControl fullWidth>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    options={options}
+                    onChange={(selectedOption) => setDepartment(selectedOption.value)}
+                  >
+                    {options.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary">Add Employee</Button>
+
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="First Name"
-                placeholder="First Name"
-                value={first_name}
-                onChange={e => setFirstName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Address"
-                placeholder="Address"
-                value={address}
-                onChange={e => setAddress(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                type="text"
-                placeholder="Job Title"
-                value={job_title}
-                onChange={e => setJobTitle(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  options={options}
-                  onChange={(selectedOption) => setDepartment(selectedOption.value)}
-                >
-                  {options.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary">Add Employee</Button>
-              
-            </Grid>
-          </Grid>
-        </form>
+          </form>
+        </Grid>
+
       </Grid>
+
     </Paper>
   );
 };

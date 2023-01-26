@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { Table, TableHead, TableCell, TableRow, Typography, Paper } from '@mui/material';
+import { Table, TableHead, TableCell, TableRow, Typography, Paper, Button } from '@mui/material';
 import Menu from '../../elements/menu';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -62,8 +62,11 @@ const DepartmentList = () => {
   return (
     <Paper>
       <Menu />
-      <Link to="/add-department">Add Department</Link>
+     
       <Typography variant="h4" align="center">Department List</Typography>
+      <Link to="/add-department"><Button variant="contained" color="primary">
+      Add Department
+            </Button></Link>
       {error && <p>{error}</p>}
       <Table>
         <TableHead>
